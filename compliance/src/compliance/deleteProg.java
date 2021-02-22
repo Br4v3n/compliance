@@ -15,10 +15,14 @@ import java.io.InputStreamReader;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextArea;
 
 public class deleteProg extends JFrame {
 
@@ -53,13 +57,13 @@ public class deleteProg extends JFrame {
 		  try {
 			fos = new FileOutputStream(f);
 		} catch (FileNotFoundException e3) {
-			// TODO Auto-generated catch block
+		
 			e3.printStackTrace();
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 586, 377);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,6 +81,25 @@ public class deleteProg extends JFrame {
 		JButton btnNewButton_2 = new JButton("check");
 		btnNewButton_2.setBounds(311, 28, 89, 23);
 		contentPane.add(btnNewButton_2);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 78, 560, 259);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(0, 0, 547, 247);
+		
+		//JScrollPane scroll = new JScrollPane(textArea);
+		panel.add(textArea);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 547, 247);
+		panel.add(scrollPane);
+		
+	//	textArea.setEditable ( false ); 
+
+		
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -105,7 +128,7 @@ public class deleteProg extends JFrame {
 
 				        Process p = rt.exec(str);
 				        InputStream is =p.getInputStream();
-				      //  System.out.println(is.available());
+				      
 				        InputStreamReader in = new InputStreamReader(is);
 
 				        StringBuffer sb = new StringBuffer();
@@ -119,12 +142,22 @@ public class deleteProg extends JFrame {
 				            line = buff.readLine();
 				        }
 				        System.out.println( sb );
+				        
+				        textArea.setText(sb.toString());
+				       
 				        if ( sb.length() != 0 ){
 				           
 				            fos.write(sb.toString().getBytes());
 
 				            
 				        }
+				        
+				        try {
+							fos.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				    }catch( Exception ex )
 				    {
 				        ex.printStackTrace();
@@ -141,8 +174,8 @@ public class deleteProg extends JFrame {
 			      FileReader fr = null;
 			      BufferedReader br = null;
 	      try {
-	         // Apertura del fichero y creacion de BufferedReader para poder
-	         // hacer una lectura comoda (disponer del metodo readLine()).
+
+
 	         archivo = new File ("C:\\Users\\Administrador\\Desktop\\testCMD.txt");
 	         fr = new FileReader (archivo);
 	         br = new BufferedReader(fr);
@@ -155,9 +188,7 @@ public class deleteProg extends JFrame {
 	      catch(Exception e1){
 	         e1.printStackTrace();
 	      }finally{
-	         // En el finally cerramos el fichero, para asegurarnos
-	         // que se cierra tanto si todo va bien como si salta 
-	         // una excepcion.
+	     
 	         try{                    
 	            if( null != fr ){   
 	               fr.close();     
@@ -208,5 +239,4 @@ public class deleteProg extends JFrame {
 		
 	
 }
-	 
 }
