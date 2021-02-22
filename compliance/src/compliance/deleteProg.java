@@ -141,7 +141,7 @@ public class deleteProg extends JFrame {
 				      //  System.out.println(line);
 				            line = buff.readLine();
 				        }
-				        System.out.println( sb );
+				        System.out.println( sb);
 				        
 				        textArea.setText(sb.toString());
 				       
